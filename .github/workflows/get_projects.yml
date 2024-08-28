@@ -14,8 +14,19 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+    
+      - name: Generate token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.SUPTEXT_AUTH_ID }}
+          private-key: ${{ secrets.SUPTEXT_AUTH_PEM }}
+          
       - uses: octokit/graphql-action@v2.x
         id: get_project_ids
+        env:
+        # GITHUB_TOKEN: ${{ secrets.GH_READ_PROJECTS }}
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         with:
           query: |
             query {
@@ -68,6 +79,4 @@ jobs:
             org: ${{ github.repository_owner }}
             repo: ${{ github.event.repository.name }}
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_READ_PROJECTS }}
       - run: "echo '${{ steps.get_project_ids.outputs.data }}'"
