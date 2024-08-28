@@ -1,6 +1,7 @@
 # https://blog.liblab.com/using-github-graphql-api-with-github-actions
 # https://gitprotect.io/blog/optimizing-github-actions-with-github-graphql-api/#Setting_up_GitHub_GraphQL_API_with_GitHub_Actions
 # https://stackoverflow.com/questions/77528848/github-graphql-api-how-to-retrieve-issues-project-items/77799377#77799377
+# https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects
 
 # Note: GITHUB_TOKEN is scoped to the repository level and cannot access projects. To access projects you can either create a GitHub App (recommended for organization projects) or a personal access token (recommended for user projects)..
 # https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/automating-projects-using-actions#github-actions-workflows
