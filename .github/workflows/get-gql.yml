@@ -10,6 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
+
+      - name: Generate token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.SUPTEXT_AUTH_ID }}
+          private-key: ${{ secrets.SUPTEXT_AUTH_PEM }}
+          
       - name: Query GitHub GraphQL API
         id: fetch_data
         uses: actions/github-script@v7
