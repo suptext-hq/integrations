@@ -30,52 +30,16 @@ jobs:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         with:
           query: |
-            query {
-              node(id: "PVT_kwDOCrWuKc4Am5oU") {
-                ... on ProjectV2 {
-                  statusUpdates(last: 1) {
-                    nodes {
-                      status
-                      createdAt
-                    }
-                  }
-                  items(last: 20) {
+             query($org: String!) {
+                organization(login: $org) {
+                  projectsV2(last: 100,orderBy: {field:CREATED_AT,direction:DESC}) {
                     nodes {
                       id
-                      fieldValues(first: 8) {
-                        nodes {
-                          ... on ProjectV2ItemFieldTextValue {
-                            text
-                            field {
-                              ... on ProjectV2FieldCommon {
-                                name
-                              }
-                            }
-                          }
-                          ... on ProjectV2ItemFieldDateValue {
-                            date
-                            field {
-                              ... on ProjectV2FieldCommon {
-                                name
-                              }
-                            }
-                          }
-                          ... on ProjectV2ItemFieldSingleSelectValue {
-                            name
-                            description
-                            field {
-                              ... on ProjectV2FieldCommon {
-                                name
-                              }
-                            }
-                          }
-                        }
-                      }
+                      title
                     }
                   }
                 }
               }
-            }
           variables: |
             org: ${{ github.repository_owner }}
             repo: ${{ github.event.repository.name }}
