@@ -1,3 +1,5 @@
+# https://blog.liblab.com/using-github-graphql-api-with-github-actions
+
 name: Get project IDs
 on:
   workflow_dispatch:
