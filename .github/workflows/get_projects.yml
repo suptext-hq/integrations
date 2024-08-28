@@ -47,7 +47,11 @@ jobs:
       - run: "echo '${{ steps.get_project_ids.outputs.data }}'"
       # - run: "echo '${{ steps.get_project_ids.outputs.data }}' | jq -r '.organization.projectsV2.nodes[].id'"
 
-      - run: echo jq -r '.organization.projectsV2.nodes[].id' <<< '${{steps.get_project_ids.outputs.data}}'
+      - run: echo 'PROJECT_IDS='$(jq '.organization.projectV2.id' '${{steps.get_project_ids.outputs.data}}') >> $GITHUB_ENV
+      
+      - run: |
+          echo "Project IDs: ${{ env.PROJECT_IDS }}"
+      
       # - run: |
           # Parse JSON output and set environment variables
           # echo "PROJECT_IDS=($(jq -r '.organization.projectsV2.nodes[].id' <<< '${{steps.get_project_ids.outputs.data}}'))" >> $GITHUB_ENV
