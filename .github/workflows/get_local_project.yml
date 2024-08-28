@@ -1,0 +1,34 @@
+# https://blog.liblab.com/using-github-graphql-api-with-github-actions
+# https://gitprotect.io/blog/optimizing-github-actions-with-github-graphql-api/#Setting_up_GitHub_GraphQL_API_with_GitHub_Actions
+# https://stackoverflow.com/questions/77528848/github-graphql-api-how-to-retrieve-issues-project-items/77799377#77799377
+
+name: Get local projects
+on:
+  workflow_dispatch:
+
+jobs:
+  logProjectIDs:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: octokit/graphql-action@v2.x
+        id: get_local_projects
+        with:
+          query: |
+            query {
+              repository(owner: "suptext-hq", name: "integrations") {
+                projectsV2(last: 10) {
+                  nodes {
+                    id
+                    title
+                  }
+                }
+              }
+            }
+          variables: |
+            org: ${{ github.repository_owner }}
+            repo: ${{ github.event.repository.name }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo '${{ steps.get_local_projects.outputs.data }}'"
