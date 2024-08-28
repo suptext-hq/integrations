@@ -47,7 +47,7 @@ jobs:
       - run: "echo '${{ steps.get_project_ids.outputs.data }}'"
       # - run: "echo '${{ steps.get_project_ids.outputs.data }}' | jq -r '.organization.projectsV2.nodes[].id'"
 
-      - run: echo 'PROJECT_IDS='$(jq '.organization.projectV2.id' '${{steps.get_project_ids.outputs.data}}') >> $GITHUB_ENV
+      - run: echo 'PROJECT_IDS='$(jq '.organization.projectV2.id' <<< '${{steps.get_project_ids.outputs.data}}') >> $GITHUB_ENV
       
       - run: |
           echo "Project IDs: ${{ env.PROJECT_IDS }}"
