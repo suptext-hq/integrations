@@ -31,11 +31,47 @@ jobs:
           script: |
             const query = `
               query {
-                organization(login: "suptext-hq") {
-                  projectsV2(last: 100,orderBy: {field:CREATED_AT,direction:DESC}) {
-                    nodes {
-                      id
-                      title
+                node(id: "PVT_kwDOCrWuKc4Am5oU") {
+                  ... on ProjectV2 {
+                    statusUpdates(last: 1) {
+                      nodes {
+                        status
+                        createdAt
+                      }
+                    }
+                    items(last: 20) {
+                      nodes {
+                        id
+                        fieldValues(first: 8) {
+                          nodes {
+                            ... on ProjectV2ItemFieldTextValue {
+                              text
+                              field {
+                                ... on ProjectV2FieldCommon {
+                                  name
+                                }
+                              }
+                            }
+                            ... on ProjectV2ItemFieldDateValue {
+                              date
+                              field {
+                                ... on ProjectV2FieldCommon {
+                                  name
+                                }
+                              }
+                            }
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name
+                              description
+                              field {
+                                ... on ProjectV2FieldCommon {
+                                  name
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -45,6 +81,3 @@ jobs:
             
       - name: Get result
         run: "echo '${{ steps.fetch_data.outputs.result }}'"
-        # env:
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
