@@ -6,17 +6,18 @@ name: Get local projects
 on:
   workflow_dispatch:
 
+permissions: write-all
+ 
 jobs:
   logProjectIDs:
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
       - uses: octokit/graphql-action@v2.x
         id: get_local_projects
         with:
           query: |
             query {
-              repository(owner: "suptext-hq", name: "integrations") {
+              viewer {
                 projectsV2(last: 10) {
                   nodes {
                     id
