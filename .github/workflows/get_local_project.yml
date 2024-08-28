@@ -17,7 +17,7 @@ jobs:
         with:
           query: |
             query {
-              viewer {
+              repository(owner: "suptext-hq", name: "integrations") {
                 projectsV2(last: 10) {
                   nodes {
                     id
