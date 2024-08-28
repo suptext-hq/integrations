@@ -66,5 +66,5 @@ jobs:
             repo: ${{ github.event.repository.name }}
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PROJECTS_FULL }}
+          GITHUB_TOKEN: ${{ secrets.GH_READ_PROJECTS }}
       - run: "echo '${{ steps.get_project_ids.outputs.data }}'"
