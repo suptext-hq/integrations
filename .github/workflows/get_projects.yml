@@ -52,6 +52,7 @@ jobs:
           
       - name: Store Properties
         run: |
-          cat project_data.json 
+          # cat project_data.json 
+          echo "PROJECT_IDS=$(jq '.organization.projectsV2.nodes[].id' project_data.json)" >> $GITHUB_ENV
           
       # - run: echo "${{ env.PROJECT_IDS }}"
