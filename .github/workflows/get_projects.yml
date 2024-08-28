@@ -2,11 +2,11 @@ name: Get project IDs
 on:
   workflow_dispatch:
 
+permissions: read-all
+
 jobs:
   logProjectIDs:
     runs-on: ubuntu-latest
-    permissions:
-      repository-projects: read
     steps:
       - uses: octokit/graphql-action@v2.x
         id: get_project_ids
