@@ -1,0 +1,46 @@
+{
+  node(id: "PVT_kwDOCrWuKc4Am5oU") {
+    ... on ProjectV2 {
+      statusUpdates(last: 1) {
+        nodes {
+          status
+          createdAt
+        }
+      }
+      items(last: 20) {
+        nodes {
+          id
+          fieldValues(first: 8) {
+            nodes {
+              ... on ProjectV2ItemFieldTextValue {
+                text
+                field {
+                  ... on ProjectV2FieldCommon {
+                    name
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldDateValue {
+                date
+                field {
+                  ... on ProjectV2FieldCommon {
+                    name
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldSingleSelectValue {
+                name
+                description
+                field {
+                  ... on ProjectV2FieldCommon {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
