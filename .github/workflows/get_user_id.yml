@@ -3,11 +3,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  logLatestRelease:
+  logUserID:
     runs-on: ubuntu-latest
     steps:
       - uses: octokit/graphql-action@v2.x
-        id: get_id
+        id: get_user_id
         with:
           query: |
             query {
@@ -15,8 +15,9 @@ jobs:
                 id
               }
             }
-          owner: ${{ github.event.repository.owner.name }}
-          repo: ${{ github.event.repository.name }}
+          variables: |
+            owner: ${{ github.event.repository.owner.name }}
+            repo: ${{ github.event.repository.name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo 'latest release: ${{ steps.get_article.outputs.data }}'"
+      - run: "echo 'User Id: ${{ steps.get_user_id.outputs.data }}'"
