@@ -17,11 +17,21 @@ jobs:
         with:
           query: |
             query {
-              repository(owner: "suptext-hq", name: "integrations") {
-                projectsV2(last: 10) {
+              viewer {
+                repositoryDiscussions(last: 10) {
                   nodes {
                     id
                     title
+                    author {
+                      login
+                    }
+                    labels(last:10) {
+                      nodes {
+                        id
+                        name
+                      }
+                      
+                    }
                   }
                 }
               }
