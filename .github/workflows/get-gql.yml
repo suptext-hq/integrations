@@ -18,6 +18,8 @@ jobs:
           # github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const secret = JSON.parse(process.env.SECRETS);
+            const Octokit = (await import('https://cdn.skypack.dev/@octokit/rest@18.12.0')).Octokit
+            const octokit = new Octokit()
             const query = `
               query {
                 organization(login: "suptext-hq") {
@@ -29,12 +31,12 @@ jobs:
                   }
                 }
               }`;
-            const response = await github.graphql(query,{  
+            const response = await octokit.graphql(query,{  
               headers: {
                   authorization: `token ${secret.GH_READ_PROJECTS}`,
                 }
               });
-            return response.repository.id;
+            return response;
       - name: Get result
         run: echo "${{steps.fetch_data.outputs.result}}"
           
