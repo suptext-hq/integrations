@@ -41,7 +41,7 @@ jobs:
                 authorization: `token ${secret.GH_PROJECTS_FULL}`,
               },
             });
-            return response;
+            return JSON.stringify(response);
       - name: Get result
         run: echo "${{steps.fetch_data.outputs.result}}"
         env:
