@@ -8,10 +8,7 @@ on:
 jobs:
   logProjectIDs:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-      repository-projects: read
+    permissions: write-all
     steps:
       - uses: octokit/graphql-action@v2.x
         id: get_project_ids
