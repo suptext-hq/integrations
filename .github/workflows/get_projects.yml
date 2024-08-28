@@ -52,7 +52,7 @@ jobs:
           
       - name: Store Properties
         run: |
-          jq -c '.organization.projectsV2.nodes[].id' project_data.json
+          jq -r '.organization.projectsV2.nodes[].id' project_data.json
           
           
       # cat project_data.json 
