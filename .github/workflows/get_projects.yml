@@ -45,7 +45,7 @@ jobs:
             repo: ${{ github.event.repository.name }}
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: "echo '${{ steps.get_project_ids.outputs.data }}'"
-      - run: "echo '${{ steps.get_project_ids.outputs.data }}' | jq -r '.data.organization.projectsV2.nodes[].id'"
+      - run: "echo '${{ steps.get_project_ids.outputs.data }}' | jq -r '.organization.projectsV2.nodes[].id'"
 
       # - run: |
           # Parse JSON output and set environment variables
