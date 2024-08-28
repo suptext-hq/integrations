@@ -32,9 +32,9 @@ jobs:
                 }
               }`;
             const response = await github.graphql(query);
-            return response.organization.projectsV2.nodes.map(d=>d.id)
+            return response; //.organization.projectsV2.nodes.map(d=>d.id)
       - name: Get result
-        run: echo "${{steps.fetch_data.outputs.result}}"
+        run: "echo '${{ steps.get_project_ids.outputs.data }}'"
         # env:
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
