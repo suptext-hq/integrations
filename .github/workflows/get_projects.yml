@@ -47,13 +47,14 @@ jobs:
       - run: "echo '${{ steps.get_project_ids.outputs.data }}'"
       # - run: "echo '${{ steps.get_project_ids.outputs.data }}' | jq -r '.organization.projectsV2.nodes[].id'"
 
-      - run: |
+      - run: echo jq -r '.organization.projectsV2.nodes[].id' <<< '${{steps.get_project_ids.outputs.data}}'
+      # - run: |
           # Parse JSON output and set environment variables
-          echo "PROJECT_IDS=($(jq -r '.organization.projectsV2.nodes[].id' <<< '${{steps.get_project_ids.outputs.data}}'))" >> $GITHUB_ENV
-          echo "PROJECT_TITLES=($(jq -r '.organization.projectsV2.nodes[].title' <<< '${{steps.get_project_ids.outputs.data}}'))" >> $GITHUB_ENV
+          # echo "PROJECT_IDS=($(jq -r '.organization.projectsV2.nodes[].id' <<< '${{steps.get_project_ids.outputs.data}}'))" >> $GITHUB_ENV
+          # echo "PROJECT_TITLES=($(jq -r '.organization.projectsV2.nodes[].title' <<< '${{steps.get_project_ids.outputs.data}}'))" >> $GITHUB_ENV
 
-      - run: |
+      # - run: |
           # Verify the environment variables were set correctly
-          echo "Project IDs: ${{ env.PROJECT_IDS }}"
-          echo "Project Titles: ${{ env.PROJECT_TITLES }}"
+          # echo "Project IDs: ${{ env.PROJECT_IDS }}"
+          # echo "Project Titles: ${{ env.PROJECT_TITLES }}"
 
