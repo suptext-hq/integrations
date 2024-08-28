@@ -35,12 +35,12 @@ jobs:
                   }
                 }
               }`;
-            const response = await graphqlWithAuth(query,{
+            const { organization }  = await graphqlWithAuth(query,{
               headers: {
                 authorization: `token ${secret.GH_PROJECTS_FULL}`,
               },
             });
-            return response;
+            return organization;
       - name: Get result
         run: echo "${{steps.fetch_data.outputs.result}}"
         env:
