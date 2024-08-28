@@ -15,9 +15,9 @@ jobs:
         env:
           SECRETS: ${{ toJSON(secrets) }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const sec = JSON.parse(process.env.SECRETS);
+            const secret = JSON.parse(process.env.SECRETS);
             const query = `
               query {
                 organization(login: "suptext-hq") {
@@ -33,7 +33,7 @@ jobs:
               }`;
             const response = await github.graphql(query,{  
               headers: {
-                  authorization: `token ${sec.GH_READ_PROJECTS}`,
+                  authorization: `token ${secret.GH_READ_PROJECTS}`,
                 }
               });
             return response.repository.id;
