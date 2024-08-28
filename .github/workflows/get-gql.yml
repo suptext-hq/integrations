@@ -8,6 +8,7 @@ on:
 jobs:
   fetch-repo-id:
     runs-on: ubuntu-latest
+    permissions: read-all
     steps:
       - name: Query GitHub GraphQL API
         id: fetch_data
@@ -16,15 +17,9 @@ jobs:
           # GITHUB_TOKEN: ${{ secrets.GH_PROJECTS_FULL }}  
           # SECRETS: ${{ toJSON(secrets) }}
         with:
-          github-token: ${{ secrets.GH_PROJECTS_FULL }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           # result-encoding: string
           script: |
-            /*const secret = JSON.parse(process.env.SECRETS);
-            const graphqlWithAuth = github.graphql.defaults({
-              headers: {
-                authorization: `token ${secret.GH_PROJECTS_FULL}`,
-              },
-            });*/
             const query = `
               query {
                 organization(login: "suptext-hq") {
@@ -41,5 +36,5 @@ jobs:
       - name: Get result
         run: echo "${{steps.fetch_data.outputs.result}}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PROJECTS_FULL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
