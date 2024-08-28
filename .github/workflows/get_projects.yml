@@ -11,7 +11,7 @@ jobs:
         with:
           query: |
             query($org: String!) {
-              organization(login: $org) {
+              organization(login: "suptext-hq") {
                 projectsV2(last: 100,orderBy: {field:CREATED_AT,direction:DESC}) {
                   nodes {
                     id
