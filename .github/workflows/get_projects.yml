@@ -10,7 +10,7 @@ jobs:
         id: get_project_ids
         with:
           query: |
-            query($org: String) {
+            query($org: String!) {
               organization(login: $org) {
                 projectsV2(last: 100,orderBy: {field:CREATED_AT,direction:DESC}) {
                   nodes {
