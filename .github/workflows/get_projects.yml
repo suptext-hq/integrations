@@ -26,7 +26,7 @@ jobs:
         id: get_project_ids
         env:
         # GITHUB_TOKEN: ${{ secrets.GH_READ_PROJECTS }}
-          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         with:
           query: |
             query {
