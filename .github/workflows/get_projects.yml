@@ -54,5 +54,5 @@ jobs:
         run: |
           echo "PROJECT_IDS=$(jq '.organization.projectsV2.nodes[].id' project_data.json)" >> $GITHUB_ENV
           
-          # cat project_data.json 
+      # cat project_data.json 
       # - run: echo "${{ env.PROJECT_IDS }}"
