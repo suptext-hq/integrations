@@ -48,8 +48,8 @@ jobs:
 
       - run: |
           # Parse JSON output and set environment variables
-          echo "PROJECT_IDS=($(jq -r '.data.organization.projectsV2.nodes[].id' <<< '${{steps.get_project_ids.outputs.data}}'))" >> $GITHUB_ENV
-          echo "PROJECT_TITLES=($(jq -r '.data.organization.projectsV2.nodes[].title' <<< '${{steps.get_project_ids.outputs.data}}'))" >> $GITHUB_ENV
+          echo "PROJECT_IDS=($(jq -r '.data.organization.projectsV2.nodes[].id' <<< "${{steps.get_project_ids.outputs.data}}"))" >> $GITHUB_ENV
+          echo "PROJECT_TITLES=($(jq -r '.data.organization.projectsV2.nodes[].title' <<< "${{steps.get_project_ids.outputs.data}}"))" >> $GITHUB_ENV
 
       - run: |
           # Verify the environment variables were set correctly
