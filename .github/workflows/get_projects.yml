@@ -44,12 +44,12 @@ jobs:
             org: ${{ github.repository_owner }}
             repo: ${{ github.event.repository.name }}
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - run: "echo '${{ steps.get_project_ids.outputs.data }}'"
+      - run: "echo '${{ steps.get_project_ids.outputs.data }}'"
 
       - run: |
           # Parse JSON output and set environment variables
-          echo "PROJECT_IDS=($(jq -r '.data.organization.projectsV2.nodes[].id' <<< "$GITHUB_OUTPUT"))" >> $GITHUB_ENV
-          echo "PROJECT_TITLES=($(jq -r '.data.organization.projectsV2.nodes[].title' <<< "$GITHUB_OUTPUT"))" >> $GITHUB_ENV
+          echo "PROJECT_IDS=($(jq -r '.data.organization.projectsV2.nodes[].id' <<< '${{steps.get_project_ids.outputs.data}}'))" >> $GITHUB_ENV
+          echo "PROJECT_TITLES=($(jq -r '.data.organization.projectsV2.nodes[].title' <<< '${{steps.get_project_ids.outputs.data}}'))" >> $GITHUB_ENV
 
       - run: |
           # Verify the environment variables were set correctly
