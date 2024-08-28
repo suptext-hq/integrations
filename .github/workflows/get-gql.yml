@@ -17,7 +17,7 @@ jobs:
           # GITHUB_TOKEN: ${{ secrets.GH_PROJECTS_FULL }}  
           # SECRETS: ${{ toJSON(secrets) }}
         with:
-          github-token: ${{ secrets.GH_PROJECTS_FULL }}
+          github-token: ${{ secrets.GH_READ_PROJECTS }}
           # result-encoding: string
           script: |
             const query = `
