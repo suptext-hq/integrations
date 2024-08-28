@@ -52,8 +52,8 @@ jobs:
           
       - name: Store Properties
         run: |
-          jq -r '.organization.projectsV2.nodes[].id' project_data.json
-          
+          ARRAY_STRING=$(jq -r '.organization.projectsV2.nodes[].id' project_data.json)
+          echo "$ARRAY_STRING"          
           
       # cat project_data.json 
       # - run: echo "${{ env.PROJECT_IDS }}"
