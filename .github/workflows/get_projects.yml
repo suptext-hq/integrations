@@ -9,6 +9,7 @@ jobs:
   logProjectIDs:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
       repository-projects: read
     steps:
