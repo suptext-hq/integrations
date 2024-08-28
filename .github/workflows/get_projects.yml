@@ -1,1 +1,30 @@
+name: Get project IDs
+on:
+  workflow_dispatch:
 
+jobs:
+  logProjectIDs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/graphql-action@v2.x
+        id: get_project_ids
+        with:
+          query: |
+            query($org: String) {
+              organization(login: $org) {
+                projectsV2(last: 100,orderBy: {field:CREATED_AT,direction:DESC}) {
+                  nodes {
+                    id
+                    title
+                    template
+                    createdAt
+                  }
+                }
+              }
+            }
+          variables: |
+            org: ${{ github.repository.owner.name }}
+            repo: ${{ github.event.repository.name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo 'User Id: ${{ steps.get_project_ids.outputs.data }}'"
