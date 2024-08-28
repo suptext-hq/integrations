@@ -19,8 +19,15 @@ jobs:
           script: |
             const query = `
               query {
-                repository(owner:"suptext-hq", name:"integrations") {
-                  id
+                organization(login: "suptext-hq") {
+                  projectsV2(last: 100,orderBy: {field:CREATED_AT,direction:DESC}) {
+                    nodes {
+                      id
+                      title
+                      template
+                      createdAt
+                    }
+                  }
                 }
               }`;
             const response = await github.graphql(query);
