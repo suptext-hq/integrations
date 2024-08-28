@@ -25,7 +25,8 @@ jobs:
           # GITHUB_TOKEN: ${{ secrets.GH_PROJECTS_FULL }}  
           # SECRETS: ${{ toJSON(secrets) }}
         with:
-          github-token: ${{ secrets.GH_READ_PROJECTS }}
+          # github-token: ${{ secrets.GH_READ_PROJECTS }}
+          github-token: ${{ steps.generate-token.outputs.token }}
           # result-encoding: string
           script: |
             const query = `
@@ -41,6 +42,7 @@ jobs:
               }`;
             const response = await github.graphql(query);
             return response; //.organization.projectsV2.nodes.map(d=>d.id)
+            
       - name: Get result
         run: "echo '${{ steps.fetch_data.outputs.result }}'"
         # env:
